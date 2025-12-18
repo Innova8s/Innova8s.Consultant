@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Consultant — Sashiko Dayani</title>
+  <meta name="description" content="AI Consultant — AgTech Strategy & AI Consultant" />
+  <style>
+/* Inlined styles from styles.css (blue / white / black palette)
+   Theme tokens: --accent: #0066ff; --bg / --surface: #ffffff; --text: #000000;
+*/
+/* Inlined styles from styles.css (monochrome + blue accent + hero texture) */
+* { box-sizing: border-box; }
+:root { --bg: #ffffff; --surface: #ffffff; --text: #000000; --text-dark: #000000; --muted: #6b6b6b; --muted-2: #9a9a9a; --border: #e6e6e6; --shadow: rgba(0,0,0,0.07); --accent: #0066ff; --accent-rgb: 0,102,255; } 
+body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.5; font-size: 16px; scroll-behavior: smooth; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; border: none; }
+header { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 2rem; background-color: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.logo { font-weight:700; color:var(--text); font-size:clamp(1rem, 1.6vw, 1.15rem); white-space:nowrap; }
+nav { display:flex; align-items:center; gap:1.4rem; }
+nav a { font-weight:500; font-size:clamp(0.86rem, 0.9vw, 0.95rem); color:var(--muted); padding:0.2rem 0.2rem; transition: color 0.3s ease; position:relative; }
+nav a::after { content:''; position:absolute; width:0; height:2px; bottom:-2px; left:0; background-color: var(--muted-2); transition: width 0.3s ease; }
+nav a:hover::after, nav a.active::after { background-color: var(--accent); width:100%; }
+nav a:hover, nav a:focus-visible, nav a.active { color: var(--text); outline: none; }
+.mobile-menu-btn { display:none; background:none; cursor:pointer; padding:5px; }
+.mobile-menu-btn span { display:block; width:25px; height:3px; background-color:var(--text); margin:5px 0; transition:0.3s; }
+.btn-pdf { display:flex; align-items:center; gap:0.25rem; font-weight:500; color:var(--accent); font-size:0.95rem; cursor:pointer; }
+.btn-pdf svg { width:1rem; height:1rem; stroke-width:2; stroke:var(--accent); fill:none; }
+.btn-contact { background-color:var(--accent); color:white; border-radius:6px; padding:0.4rem 1.3rem; font-weight:600; font-size:0.95rem; transition: background-color 0.2s ease; cursor:pointer; }
+.btn-contact:hover, .btn-contact:focus-visible { background-color:#0052cc; outline:none; } 
+.hero { padding:3rem 2rem 4rem; background: linear-gradient(135deg, var(--accent) 0%, #000000 100%); color:white; display:flex; flex-wrap:wrap; align-items:center; gap:2rem; position:relative; min-height:380px; user-select:none; }
+.hero::after { content:''; position:absolute; inset:0; pointer-events:none; background: repeating-linear-gradient(135deg, rgba(var(--accent-rgb),0.06) 0 1px, rgba(var(--accent-rgb),0.03) 1px 10px); mix-blend-mode:screen; opacity:0.45; z-index:0; } 
+.hero > * { position:relative; z-index:1; }
+.hero-text { flex:1 1 480px; max-width:650px; text-align:left; }
+.hero-location { font-size:0.9rem; display:flex; align-items:center; margin-bottom:0.35rem; gap:0.45rem; opacity:0.9; }
+.hero-location svg { width:1.125rem; height:1.125rem; stroke-width:2.5; stroke:white; fill:none; }
+.hero h1 { margin:0 0 0.1rem 0; font-size:clamp(1.6rem, 5vw, 2.8rem); font-weight:800; line-height:1.1; user-select:text; }
+.hero h2 { margin:0 0 1.1rem 0; font-weight:400; font-size:clamp(1rem, 2.2vw, 1.3rem); color:#d9d9d9; user-select:text; }
+.hero p { max-width:520px; line-height:1.6; font-size:clamp(0.95rem, 1.7vw, 1.05rem); color:#d5d5d5; user-select:text; margin-bottom:2.3rem; }
+.hero-buttons { display:flex; gap:1rem; flex-wrap:wrap; }
+.btn-primary, .btn-secondary { border-radius:6px; font-weight:600; font-size:1rem; padding:0.6rem 1.4rem; display:flex; align-items:center; gap:0.6rem; cursor:pointer; transition: background-color 0.2s ease, color 0.2s ease; user-select:none; border:2px solid transparent; }
+.btn-primary { background-color:var(--accent); color:white; border-color:transparent; }
+.btn-primary svg { stroke:white; width:1.25rem; height:1.25rem; }
+.btn-primary:hover, .btn-primary:focus-visible { background-color:#0052cc; outline:none; } 
+.btn-secondary { background-color:#ffffff; color:var(--accent); border:2px solid var(--accent); box-shadow:0 1px 0 rgba(0,0,0,0.03); }
+.btn-secondary svg { width:1.1rem; height:1.1rem; fill:currentColor; }
+.btn-secondary:hover, .btn-secondary:focus-visible { background-color:#ffffff; outline:none; box-shadow:0 4px 14px rgba(0,102,255,0.06); }
+.hero-icon { flex:0 0 auto; width:clamp(80px, 18vw, 160px); height:auto; margin-left:auto; margin-right:2rem; opacity:0.06; user-select:none; }
+.hero-icon svg { width:100%; height:auto; stroke:white; stroke-width:3; fill:none; display:block; }
+section { max-width:1100px; margin:0 auto; padding:4rem 2rem; }
+h2.section-title { font-weight:800; font-size:1.7rem; color:var(--text); margin-bottom:0.3rem; text-align:center; user-select:text; }
+p.section-subtitle { color:var(--muted); font-weight:400; font-size:1rem; margin-top:0; margin-bottom:2.5rem; text-align:center; user-select:text; }
+
+/* Section-specific headings/subtitles in requested sections should use the blue accent */
+#services h2.section-title,
+#training h2.section-title,
+#categories h2.section-title,
+#certifications h2.section-title { color: var(--accent); }
+#services p.section-subtitle,
+#training p.section-subtitle,
+#categories p.section-subtitle,
+#certifications p.section-subtitle { color: var(--accent); }
+.consulting-services-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:1.4rem 1.8rem; max-width:1080px; margin:0 auto; padding:0 1rem; }
+.service-card { background-color: var(--surface); border-radius:12px; padding:1.5rem 1.6rem; box-shadow: 0 1.2rem 3rem var(--shadow); display:flex; gap:1rem; user-select:none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.service-card:hover { transform: translateY(-5px); box-shadow: 0 1.5rem 4rem rgba(0,0,0,0.1); }
+      .service-icon { background-color: var(--accent); color: white; padding:0.4rem; border-radius:7px; flex-shrink:0; width:2.6rem; height:2.6rem; display:flex; align-items:center; justify-content:center; }
+      .service-icon svg { width:1.25rem; height:1.25rem; fill:currentColor; stroke:none; }
+.service-text strong { font-weight:700; margin-bottom:0.32rem; font-size:1.05rem; color:var(--accent); }
+.service-text p { font-weight:400; font-size:0.9rem; line-height:1.4; margin:0; color:var(--muted); user-select:text; }
+.training-list { max-width:840px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1.2rem 4rem; user-select:text; padding:0 1rem; }
+.training-item { display:flex; align-items:flex-start; gap:0.95rem; font-weight:600; font-size:1.12rem; background-color:var(--surface); color:var(--accent); line-height:1.55; user-select:text; padding:0.75rem 0; }
+      .training-square { width:1.9rem; height:1.9rem; background-color:transparent; border-radius:6px; flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; }
+.categories-list { max-width:820px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:1rem 2rem; user-select:text; }
+.category-card { background-color:var(--surface); display:flex; align-items:center; gap:0.8rem; border-radius:10px; padding:1.3rem 1.7rem; box-shadow: 0 1.1rem 2.7rem var(--shadow); user-select:none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.category-card:hover { transform: translateY(-3px); box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.08); }
+.category-square { width:2.2rem; height:2.2rem; background-color:var(--accent); border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.category-text { font-weight:600; font-size:1rem; color:var(--accent); user-select:text; line-height:1.3; }
+.certifications-grid { max-width:1020px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap:1rem 1.8rem; user-select:text; }
+.cert-card { background-color:var(--surface); display:flex; gap:0.7rem; align-items:flex-start; border-radius:10px; padding:1rem 1.5rem; box-shadow: 0 1.3rem 3rem var(--shadow); font-size:0.88rem; line-height:1.3; user-select:none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.cert-card:hover { transform: translateY(-3px); box-shadow: 0 1.5rem 3.5rem rgba(0,0,0,0.08); }
+.cert-square { width:1.6rem; height:1.6rem; background-color:var(--accent); border-radius:6px; flex-shrink:0; margin-top:5px; }
+.cert-info { flex-grow:1; color:var(--text); }
+.cert-title { font-weight:700; margin-bottom:0.25rem; font-size:0.94rem; user-select:text; }
+.cert-sub { font-weight:400; font-size:0.77rem; color:#4da3ff; margin-top:0; user-select:text; }
+.footer-cta { background: linear-gradient(135deg, var(--accent) 0%, #000000 100%); color:white; text-align:center; padding:4rem 2rem; user-select:none; } 
+.footer-cta h2 { margin:0 0 0.45rem 0; font-size:1.7rem; font-weight:700; user-select:text; }
+.footer-cta p { font-weight:400; font-size:1rem; margin:0 0 2rem 0; max-width:610px; margin-left:auto; margin-right:auto; user-select:text; }
+.footer-buttons { display:flex; justify-content:center; gap:1.1rem; flex-wrap:wrap; }
+.footer-btn { display:flex; align-items:center; gap:0.5rem; border-radius:7px; font-weight:600; font-size:1rem; padding:0.65rem 1.7rem; cursor:pointer; border:2px solid transparent; user-select:none; transition: background-color 0.2s ease, color 0.2s ease; background-color:white; color:var(--text); }
+.footer-btn svg { width:1.25rem; height:1.25rem; stroke:var(--text); fill:none; }
+.footer-btn-secondary { background:#ffffff; border-color:var(--accent); color:var(--accent); box-shadow:0 1px 0 rgba(0,0,0,0.03); }
+.footer-btn-secondary svg { fill: currentColor; stroke: none; }
+.footer-btn:hover, .footer-btn:focus-visible { background-color:#f2f2f2; outline:none; color:var(--text); }
+.footer-btn-secondary:hover, .footer-btn-secondary:focus-visible { background-color: #ffffff; outline:none; color:var(--accent); box-shadow: 0 6px 20px rgba(0,102,255,0.08); }
+footer { background:var(--surface); text-align:center; font-weight:400; font-size:0.9rem; color:var(--muted); padding:1.4rem 1rem 2rem 1rem; user-select:none; user-select:text; }
+footer small { display:block; margin-top:0.1rem; }
+.scroll-top { position:fixed; bottom:20px; right:20px; background-color:var(--accent); color:white; width:2.5rem; height:2.5rem; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; visibility:hidden; transition: opacity 0.3s, visibility 0.3s; z-index:1000; }
+.scroll-top.visible { opacity:1; visibility:visible; }
+.scroll-top:hover { background-color: #0052cc; }
+
+/* Inline icon depth & hover rules */
+.service-icon { position: relative; overflow: hidden; }
+.service-icon::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border-radius: 7px; pointer-events: none; }
+.service-icon svg,
+.category-square svg {
+  width:22px;
+  height:22px;
+  stroke:white;
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.training-square,
+.cert-square {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cert-square svg {
+  width:16px;
+  height:16px;
+  stroke:white;
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.emoji-icon {
+  display:block;
+  font-size:1.25rem;
+  line-height:1;
+}
+.service-card:hover .service-icon svg, .category-card:hover .category-square svg { transform: scale(1.06); filter: drop-shadow(0 6px 14px rgba(0,0,0,0.22)); }
+.training-item:hover .training-square { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,102,255,0.06); }
+.cert-card:hover .cert-square { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,102,255,0.06); }
+
+@media (max-width:800px) { header { padding:0.75rem 1rem; } .mobile-menu-btn { display:block; } nav { position:fixed; top:60px; left:0; width:100%; background-color:white; flex-direction:column; padding:1rem 0; gap:0; box-shadow:0 5px 10px rgba(0,0,0,0.1); transform:translateY(-100%); opacity:0; visibility:hidden; transition:transform 0.3s ease, opacity 0.3s ease, visibility 0.3s; z-index:998; } nav.active { transform:translateY(0); opacity:1; visibility:visible; } nav a { width:100%; padding:0.8rem 2rem; border-bottom:1px solid #f0f0f0; } nav a:last-child { border-bottom:none; } .btn-pdf, .btn-contact { justify-content:flex-start; } .hero { padding:2.5rem 1.5rem 3rem; min-height:auto; } .hero-text { max-width:100%; } .hero-icon { display:none; } section { padding:3rem 1.5rem; } .consulting-services-grid, .training-list, .categories-list, .certifications-grid { grid-template-columns:1fr !important; } .footer-buttons { flex-direction:column; gap:1rem; } }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">AI Consultant</div>
+    <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#training" class="nav-link">Training</a>
+      <a href="#categories" class="nav-link">Rates</a>
+      <a href="#certifications" class="nav-link">Certifications</a>
+      <a class="btn-pdf nav-link" href="#" aria-label="Download PDF profile">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3v12"></path>
+          <path d="M12 15l-4-4m4 4l4-4"></path>
+          <path d="M4 21h16"></path>
+        </svg>
+        PDF
+      </a>
+      <button class="btn-contact" aria-label="Contact AI Consultant">Contact</button>
+    </nav>
+  </header>
+
+  <section class="hero" aria-label="Hero introduction with contact">
+    <div class="hero-text">
+      <div class="hero-location">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M12 11c1.104 0 2-.895 2-2s-.896-2-2-2-2 .895-2 2 .896 2 2 2z" />
+            <path d="M12 21s7-4.5 7-10a7 7 0 10-14 0c0 5.5 7 10 7 10z" />
+        </svg>
+        Perth / Singapore
+      </div>
+      <h1>Sashiko Dayani</h1>
+      <h2>AgTech Strategy & AI Consultant</h2>
+      <p>Blending hands-on AgTech entrepreneurship with deep technical insight. As founder of Innova8s, I build digital twins and AI systems for livestock and crop farms across APAC. My focus is practical innovation — turning messy farm data into early disease alerts, smarter workflows, and real sustainability impact.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" aria-label="Get in touch with Sashiko Dayani"> 
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 8l8.5 6m6.5-6l-8.5 6" />
+            <rect width="18" height="12" x="3" y="6" rx="2" ry="2" />
+          </svg>
+          Get in Touch
+        </button>
+        <button class="btn-secondary" aria-label="View LinkedIn profile" onclick="window.open('https://linkedin.com/in/sashiko-dayani-9056231b9', '_blank')">
+          <svg role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M4.98 3.5C4.98 4.6 4.13 5.5 3 5.5S1 4.6 1 3.5 1.87 1 3 1s1.98.9 1.98 2.5zM.5 8h5v14h-5V8zM8.5 8h4.8v2h.1c.7-1.3 2.4-2.6 5-2.6 5.4 0 6 3.5 6 8v9h-5v-8c0-1.9 0-4.5-3-4.5-3 0-3.5 2.3-3.5 4.3v8.2h-5V8z" />
+          </svg>
+          LinkedIn
+        </button>
+
+      </div>
+    </div>
+    <div class="hero-icon" aria-hidden="true" role="img" aria-label="Plant icon representing growth">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path d="M20 40c12-8 18-12 18-20a6 6 0 0 0-12 0c0 12-6 24-6 28h30" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        <path d="M32 44v16m-5-2h10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg>
+    </div>
+  </section>
+
+<!-- CONSULTING SERVICES ICONS -->
+<section id="services">
+  <div class="consulting-services-grid">
+
+    <!-- AgTech & AI Strategy -->
+    <article class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24">
+          <rect x="4" y="4" width="16" height="16" rx="2" />
+          <path d="M9 9h6v6H9z" />
+        </svg>
+      </div>
+      <div class="service-text">
+        <strong>AgTech & AI Strategy Consulting</strong>
+        <p>Transform agricultural operations with AI and digital twins</p>
+      </div>
+    </article>
+
+    <!-- Data Analytics -->
+    <article class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 3v18h18" />
+          <rect x="7" y="13" width="3" height="5" />
+          <rect x="12" y="9" width="3" height="9" />
+          <rect x="17" y="5" width="3" height="13" />
+        </svg>
+      </div>
+      <div class="service-text">
+        <strong>Data Analytics & Decision Advisory</strong>
+        <p>Turn complex farm data into actionable insights</p>
+      </div>
+    </article>
+
+    <!-- Agile Leadership -->
+    <article class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="3" />
+          <path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2" />
+        </svg>
+      </div>
+      <div class="service-text">
+        <strong>Agile Leadership & Product Delivery</strong>
+        <p>Build high-performing teams and accelerate innovation</p>
+      </div>
+    </article>
+
+    <!-- Growth Advisory -->
+    <article class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 17l6-6 4 4 7-7" />
+          <path d="M14 4h7v7" />
+        </svg>
+      </div>
+      <div class="service-text">
+        <strong>Go-to-Market & Growth Advisory</strong>
+        <p>Scale from proof-of-concept to global markets</p>
+      </div>
+    </article>
+
+  </div>
+</section> 
+
+<!-- TRAINING ICONS -->
+<section id="training" aria-label="Training and Educational Services">
+  <h2 class="section-title">Training &amp; Educational Services</h2>
+  <p class="section-subtitle">Empowering teams with practical skills for the future of agriculture</p>
+  <div class="training-list">
+
+    <div class="training-item">
+      <div class="training-square" aria-hidden="true"><span class="emoji-icon" role="img" aria-label="AI in Agriculture">🌾</span></div>
+      AI in Agriculture: From Data to Decisions
+    </div>
+
+    <div class="training-item">
+      <div class="training-square" aria-hidden="true"><span class="emoji-icon" role="img" aria-label="Agile Leadership">💡</span></div>
+      Agile Leadership for Innovation
+    </div>
+
+    <div class="training-item">
+      <div class="training-square" aria-hidden="true"><span class="emoji-icon" role="img" aria-label="Communicating with Impact">🗣️</span></div>
+      Communicating with Impact for Tech Leaders
+    </div>
+
+    <div class="training-item">
+      <div class="training-square" aria-hidden="true"><span class="emoji-icon" role="img" aria-label="Data-driven Strategy">📈</span></div>
+      Data-Driven Strategy Bootcamp
+    </div>
+
+  </div>
+</section>  
+
+<!-- SERVICE CATEGORIES ICONS -->
+<section id="categories">
+  <div class="categories-list">
+
+    <div class="category-card">
+      <div class="category-square">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" />
+          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+        </svg>
+      </div>
+      <div class="category-text">Strategic / Board-level Consulting</div>
+    </div>
+
+    <div class="category-card">
+      <div class="category-square">
+        <svg viewBox="0 0 24 24">
+          <ellipse cx="12" cy="6" rx="7" ry="3" />
+          <path d="M5 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6" />
+        </svg>
+      </div>
+      <div class="category-text">Technical / Data Advisory</div>
+    </div>
+
+    <div class="category-card">
+      <div class="category-square">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 6v6l4 2" />
+        </svg>
+      </div>
+      <div class="category-text">Coaching / Agile Transformation</div>
+    </div>
+
+    <div class="category-card">
+      <div class="category-square">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="14" rx="2" />
+          <path d="M7 20h10" />
+        </svg>
+      </div>
+      <div class="category-text">Training / Workshops</div>
+    </div>
+
+    <div class="category-card">
+      <div class="category-square">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2a7 7 0 0 0-7 7v4a7 7 0 0 0 7 7 7 7 0 0 0 7-7V9a7 7 0 0 0-7-7z" />
+          <path d="M9 10h6" />
+        </svg>
+      </div>
+      <div class="category-text">Speaking Engagements</div>
+    </div>
+
+  </div>
+</section> 
+
+  <section id="certifications" aria-label="Certifications">
+    <h2 class="section-title">Certifications</h2>
+    <p class="section-subtitle">Professional credentials and continuous learning</p>
+    <div class="certifications-grid">
+      <article class="cert-card" tabindex="0" aria-labelledby="cert1-title cert1-sub"><div class="cert-square" aria-hidden="false"><svg viewBox="0 0 24 24" role="img" aria-label="Data Science & Analytics badge"><title>Data Science &amp; Analytics</title><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" fill="white"/></svg></div><div class="cert-info"><div class="cert-title" id="cert1-title">Data Science &amp; Analytics for Strategic Decisions</div><div class="cert-sub" id="cert1-sub">SMU ExD • 2024</div></div></article>
+      <article class="cert-card" tabindex="0" aria-labelledby="cert2-title cert2-sub"><div class="cert-square" aria-hidden="false"><svg viewBox="0 0 24 24" role="img" aria-label="PMI Agile Certified Practitioner"><title>PMI-ACP</title><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" fill="white"/></svg></div><div class="cert-info"><div class="cert-title" id="cert2-title">PMI Agile Certified Practitioner (PMI-ACP)</div><div class="cert-sub" id="cert2-sub">PMI • 2021</div></div></article>
+      <article class="cert-card" tabindex="0" aria-labelledby="cert3-title cert3-sub"><div class="cert-square" aria-hidden="false"><svg viewBox="0 0 24 24" role="img" aria-label="ICAgile ICP-ACC"><title>ICP-ACC</title><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" fill="white"/></svg></div><div class="cert-info"><div class="cert-title" id="cert3-title">ICAgile Certified Professional – Agile Coaching (ICP-ACC)</div><div class="cert-sub" id="cert3-sub">ICAgile • 2021</div></div></article>
+      <article class="cert-card" tabindex="0" aria-labelledby="cert4-title cert4-sub"><div class="cert-square" aria-hidden="false"><svg viewBox="0 0 24 24" role="img" aria-label="ICAgile ICP-LEA"><title>ICP-LEA</title><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" fill="white"/></svg></div><div class="cert-info"><div class="cert-title" id="cert4-title">ICAgile Certified Professional – Leading with Agility (ICP-LEA)</div><div class="cert-sub" id="cert4-sub">ICAgile • 2021</div></div></article>
+      <article class="cert-card" tabindex="0" aria-labelledby="cert5-title cert5-sub"><div class="cert-square" aria-hidden="false"><svg viewBox="0 0 24 24" role="img" aria-label="ICAgile ICP-ATF"><title>ICP-ATF</title><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" fill="white"/></svg></div><div class="cert-info"><div class="cert-title" id="cert5-title">ICAgile Certified Professional – Team Facilitation (ICP-ATF)</div><div class="cert-sub" id="cert5-sub">ICAgile • 2021</div></div></article>
+      <article class="cert-card" tabindex="0" aria-labelledby="cert6-title cert6-sub"><div class="cert-square" aria-hidden="false"><svg viewBox="0 0 24 24" role="img" aria-label="Communicating with Impact"><title>Communicating with Impact</title><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" fill="white"/></svg></div><div class="cert-info"><div class="cert-title" id="cert6-title">Communicating with Impact Experience</div><div class="cert-sub" id="cert6-sub">ExecOnline</div></div></article>
+      <article class="cert-card" tabindex="0" aria-labelledby="cert7-title cert7-sub"><div class="cert-square" aria-hidden="false"><svg viewBox="0 0 24 24" role="img" aria-label="LinkedIn course"><title>LinkedIn – Marketing Leads with AI</title><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" fill="white"/></svg></div><div class="cert-info"><div class="cert-title" id="cert7-title">How to Generate Marketing Leads with AI</div><div class="cert-sub" id="cert7-sub">LinkedIn • 2024</div></div></article>
+    </div>
+  </section>
+
+  <section class="footer-cta" aria-label="Let's Work Together contact">
+    <h2>Let's Work Together</h2>
+    <p>Ready to transform your agricultural operations with AI and data-driven strategies? Let's discuss how I can help you achieve your goals.</p>
+    <div class="footer-buttons">
+      <a href="mailto:sashiko.dayani@outlook.com"><button class="footer-btn" aria-label="Email sashiko.dayani@outlook.com"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l8.5 6m6.5-6l-8.5 6m-4.5 2h13a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2z" /></svg> sashiko.dayani@outlook.com</button></a>
+    </div>
+  </section>
+
+  <footer>
+    <small>© 2025 Sashiko Dayani. All rights reserved.</small>
+    <small>AgTech Strategy & AI Consultant | Perth / Singapore</small>
+  </footer>
+
+  <button class="scroll-top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+
+  <script>
+// Inlined script (from script.js)
+// Mobile menu toggle
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const nav = document.querySelector('nav');
+
+mobileMenuBtn.addEventListener('click', () => {
+  nav.classList.toggle('active');
+  mobileMenuBtn.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('active');
+    mobileMenuBtn.classList.remove('active');
+  });
+});
+
+// Active navigation highlighting
+const sections = document.querySelectorAll('section');
+const navItems = document.querySelectorAll('.nav-link');
+
+function highlightNav() {
+  let scrollY = window.pageYOffset;
+  sections.forEach(section => {
+    const sectionHeight = section.offsetHeight;
+    const sectionTop = section.offsetTop - 100;
+    const sectionId = section.getAttribute('id');
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === `#${sectionId}`) {
+          item.classList.add('active');
+        }
+      });
+    }
+  });
+}
+window.addEventListener('scroll', highlightNav);
+
+// Scroll to top button
+const scrollTopBtn = document.querySelector('.scroll-top');
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Smooth scrolling for navigation links
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href');
+    const targetSection = document.querySelector(targetId);
+    if (targetSection) {
+      window.scrollTo({ top: targetSection.offsetTop - 80, behavior: 'smooth' });
+    }
+  });
+});
+
+// Contact button functionality
+const contactButtons = document.querySelectorAll('.btn-contact, .btn-primary, .footer-btn');
+contactButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const footerCta = document.querySelector('.footer-cta');
+    if (footerCta) {
+      window.scrollTo({ top: footerCta.offsetTop - 80, behavior: 'smooth' });
+    }
+  });
+});
+
+// PDF download button
+const pdfButton = document.querySelector('.btn-pdf');
+pdfButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  alert('PDF download functionality would be implemented here');
+});
+
+// LinkedIn button functionality
+const linkedinButtons = document.querySelectorAll('.btn-secondary, .footer-btn-secondary');
+linkedinButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    window.open('https://linkedin.com/in/sashiko-dayani', '_blank');
+  });
+});
+  </script>
+</body>
+</html>
