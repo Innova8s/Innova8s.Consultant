@@ -1,0 +1,895 @@
+/* Basic reset and global styles */
+/* Theme tokens:
+   - --accent: #0066ff (primary blue accent used for buttons, icons, interactive states)
+   - --accent-rgb: 0,102,255 (for textures)
+   - --bg / --surface: #ffffff (white backgrounds & cards)
+   - --text / --text-dark: #000000 (pure black text and dark accents)
+   - --border: #e6e6e6 (subtle card/border color)
+   To revert: restore previous :root values (search for earlier commit or replace variables with previous hex values).
+*/
+* {
+  box-sizing: border-box;
+}
+
+/* Palette: blue / white / black (user requested) */
+:root {
+  --bg: #ffffff; /* page background */
+  --surface: #ffffff; /* surfaces/cards */
+  --text: #000000; /* pure black text */
+  --text-dark: #000000; /* dark accents (same as text) */
+  --muted: #6b6b6b; /* secondary text */
+  --muted-2: #9a9a9a; /* tertiary / accents */
+  --border: #e6e6e6; /* thin borders */
+  --shadow: rgba(0,0,0,0.07);
+  --accent: #0066ff; /* vibrant blue accent */
+  --accent-rgb: 0,102,255; /* for rgba use in textures */
+} 
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+.hero h1 {
+  margin: 0 0 0.1rem 0;
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  user-select: text;
+}
+.hero h2 {
+  margin: 0 0 1.1rem 0;
+  font-weight: 400;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  color: #d9d9d9;
+  user-select: text;
+}
+.hero p {
+  max-width: 520px;
+  line-height: 1.6;
+  font-size: clamp(0.95rem, 1.7vw, 1.05rem);
+  color: #d5d5d5;
+  user-select: text;
+  margin-bottom: 2.3rem;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  background-color: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Logo */
+.logo {
+  font-weight: 700;
+  color: var(--text);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  white-space: nowrap;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+nav a {
+  font-weight: 500;
+  font-size: clamp(0.86rem, 0.9vw, 0.95rem);
+  color: var(--muted);
+  padding: 0.2rem 0.2rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--muted-2);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after,
+nav a.active::after {
+  width: 100%;
+}
+
+nav a:hover,
+nav a:focus-visible,
+nav a.active {
+  color: var(--text);
+  outline: none;
+}
+
+/* Make the active/hover underline use accent blue for a subtle highlight */
+nav a:hover::after,
+nav a.active::after {
+  background-color: var(--accent);
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--text);
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* PDF Link */
+.btn-pdf {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-pdf svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2;
+  stroke: var(--accent);
+  fill: none;
+}
+
+/* Contact button -> blue accent */
+.btn-contact {
+  background-color: var(--accent);
+  color: white;
+  border-radius: 6px;
+  padding: 0.4rem 1.3rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-contact:hover,
+.btn-contact:focus-visible {
+  background-color: #0052cc; /* slightly darker blue */
+  outline: none;
+} 
+
+/* Hero Section */
+.hero {
+  padding: 3rem 2rem 4rem;
+  /* hero: vibrant blue to black gradient */
+  background: linear-gradient(135deg, var(--accent) 0%, #000000 100%);
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  min-height: 380px;
+  user-select: none;
+} 
+
+/* Subtle blue texture overlay for the hero to add visual interest without overpowering the monochrome theme */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* repeating diagonal lines using the accent color at very low opacity */
+  background: repeating-linear-gradient(135deg,
+    rgba(var(--accent-rgb), 0.06) 0 1px,
+    rgba(var(--accent-rgb), 0.03) 1px 10px);
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.hero > * {
+  /* keep hero content above texture */
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text {
+  flex: 1 1 480px;
+  max-width: 650px;
+  text-align: left;
+}
+
+.hero-location {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.35rem;
+  gap: 0.45rem;
+  opacity: 0.9;
+}
+
+.hero-location svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  stroke-width: 2.5;
+  stroke: white;
+  fill: none;
+}
+
+.hero h1 {
+  margin: 0 0 0.1rem 0;
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  user-select: text;
+}
+
+.hero h2 {
+  margin: 0 0 1.1rem 0;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: #d9d9d9;
+  user-select: text;
+}
+
+.hero p {
+  max-width: 520px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #d5d5d5;
+  user-select: text;
+  margin-bottom: 2.3rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Hero buttons styles */
+.btn-primary,
+.btn-secondary {
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+.btn-primary svg {
+  stroke: white;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: #0052cc;
+  outline: none;
+} 
+
+.btn-secondary {
+  background-color: #ffffff; /* white background requested */
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+.btn-secondary svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor; /* match the text color (accent) */
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  background-color: #ffffff; /* stay white on hover */
+  outline: none;
+  box-shadow: 0 4px 14px rgba(0,102,255,0.06);
+} 
+
+/* Hero symbolic icon */
+.hero-icon {
+  flex: 0 0 auto;
+  width: clamp(80px, 18vw, 160px);
+  height: auto;
+  margin-left: auto;
+  margin-right: 2rem;
+  opacity: 0.06;
+  user-select: none;
+}
+
+.hero-icon svg {
+  width: 100%;
+  height: auto;
+  stroke: white;
+  stroke-width: 3;
+  fill: none;
+  display: block;
+}
+
+/* Sections common styles */
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+h2.section-title {
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  text-align: center;
+  user-select: text;
+}
+
+p.section-subtitle {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  user-select: text;
+}
+
+/* Section-specific headings/subtitles in requested sections should use the blue accent */
+#services h2.section-title,
+#training h2.section-title,
+#categories h2.section-title,
+#certifications h2.section-title {
+  color: var(--accent);
+}
+
+#services p.section-subtitle,
+#training p.section-subtitle,
+#categories p.section-subtitle,
+#certifications p.section-subtitle {
+  color: var(--accent);
+} 
+
+/* Consulting Services */
+.consulting-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem 1.8rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.service-card {
+  background-color: var(--surface);
+  border-radius: 12px;
+  padding: 1.5rem 1.6rem;
+  box-shadow: 0 1.2rem 3rem var(--shadow);
+  display: flex;
+  gap: 1rem;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.1);
+}
+
+.service-icon {
+  position: relative;
+  background-color: var(--accent);
+  padding: 0.4rem;
+  border-radius: 7px;
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+  overflow: hidden;
+}
+
+/* subtle glossy overlay for more depth */
+.service-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+.service-card:hover .service-icon {
+  background-color: #0052cc;
+  transform: translateY(-2px);
+}
+
+.service-icon svg,
+.category-square svg {
+  width: 22px;
+  height: 22px;
+  stroke: white;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.18));
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+..service-card:hover .service-icon svg,
+.category-card:hover .category-square svg {
+  transform: scale(1.06);
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.22));
+}
+
+.service-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  user-select: text;
+}
+
+.service-text strong {
+  font-weight: 700;
+  margin-bottom: 0.32rem;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+.service-text p {
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--muted);
+  user-select: text;
+}
+
+/* Training & Educational Services */
+.training-list {
+  max-width: 840px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem 4rem;
+  user-select: text;
+}
+.training-list {
+  padding: 0 1rem;
+}
+
+/* Make each training item an individual card (more specific selector so it wins over later rules) */
+.training-list .training-item {
+  background-color: var(--surface);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  align-items: flex-start;
+}
+
+/* Hover effect for the cards */
+.training-list .training-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.09);
+}
+.training-item {
+  display:flex;
+  align-items:flex-start;
+  gap:0.95rem;
+  font-weight:600;
+  font-size:1.12rem;
+  background-color:var(--surface);
+  color:var(--accent);
+  line-height:1.55;
+  user-select:text;
+  padding:0.75rem 0;
+} 
+
+.training-square {
+  width:1.9rem;
+  height:1.9rem;
+  background-color: transparent;
+  border-radius:6px;
+  flex-shrink:0;
+  margin-top:2px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.25rem;
+}
+
+.emoji-icon {
+  display:block;
+  font-size:1.35rem;
+  line-height:1;
+}
+
+.training-item:hover .training-square {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,102,255,0.06);
+} 
+
+.training-item:hover .training-square {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,102,255,0.06);
+}   
+
+/* Service Categories */
+.categories-list {
+  max-width: 820px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem 2rem;
+  user-select: text;
+}
+
+.category-card {
+  background-color: var(--surface);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 10px;
+  padding: 1.3rem 1.7rem;
+  box-shadow: 0 1.1rem 2.7rem var(--shadow);
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.08);
+}
+
+.category-square {
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: var(--accent);
+  border-radius: 10px;
+  flex-shrink: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.category-square svg {
+  width: 22px;
+  height: 22px;
+  stroke: white;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display:block;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.18));
+}
+
+.category-card:hover .category-square {
+  background-color: #0052cc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,102,255,0.06);
+}
+
+/* Certifications */
+.certifications-grid {
+  max-width: 1020px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem 1.8rem;
+  user-select: text;
+}
+
+.cert-card {
+  background-color: var(--surface);
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 1.3rem 3rem var(--shadow);
+  font-size: 0.88rem;
+  line-height: 1.3;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1.5rem 3.5rem rgb(0 0 0 / 0.08);
+}
+
+.cert-square {
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: var(--accent);
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.cert-square svg {
+  width: 16px;
+  height: 16px;
+  stroke: white;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display:block;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.18));
+}
+
+.cert-card:hover .cert-square {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,102,255,0.06);
+}   
+
+.cert-info {
+  flex-grow: 1;
+  color: var(--text);
+}
+
+.cert-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  font-size: 0.94rem;
+  user-select: text;
+}
+
+.cert-sub {
+  font-weight: 400;
+  font-size: 0.77rem;
+  color: #4da3ff;
+  margin-top: 0;
+  user-select: text;
+  color: var(--muted);
+  margin-top: 0;
+  user-select: text;
+}
+
+/* Footer CTA Section */
+.footer-cta {
+  /* footer: vibrant blue to black gradient */
+  background: linear-gradient(135deg, var(--accent) 0%, #000000 100%);
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+  user-select: none;
+} 
+
+.footer-cta h2 {
+  margin: 0 0 0.45rem 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  user-select: text;
+}
+
+.footer-cta p {
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 0 0 2rem 0;
+  max-width: 610px;
+  margin-left: auto;
+  margin-right: auto;
+  user-select: text;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.footer-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.65rem 1.7rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  user-select: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  background-color: white;
+  color: var(--text);
+}
+
+.footer-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: var(--text);
+  fill: none;
+}
+
+.footer-btn-secondary {
+  background: transparent;
+  border-color: white;
+  color: white;
+}
+
+.footer-btn-secondary svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.footer-btn:hover,
+.footer-btn:focus-visible {
+  background-color: #f2f2f2;
+  outline: none;
+  color: var(--text);
+}
+
+.footer-btn-secondary:hover,
+.footer-btn-secondary:focus-visible {
+  background-color: rgba(255 255 255 / 0.2);
+  outline: none;
+  color: white;
+}
+
+/* Footer */
+footer {
+  background: var(--surface);
+  text-align: center;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding: 1.4rem 1rem 2rem 1rem;
+  user-select: none;
+  user-select: text;
+}
+
+footer small {
+  display: block;
+  margin-top: 0.1rem;
+}
+
+/* Scroll to top button */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--accent);
+  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1000;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-top:hover {
+  background-color: #0052cc;
+} 
+
+/* Responsive */
+@media (max-width: 800px) {
+  header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    flex-direction: column;
+    padding: 1rem 0;
+    gap: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+    z-index: 998;
+  }
+  
+  nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  nav a {
+    width: 100%;
+    padding: 0.8rem 2rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  nav a:last-child {
+    border-bottom: none;
+  }
+  
+  .btn-pdf, .btn-contact {
+    justify-content: flex-start;
+  }
+
+  .hero {
+    padding: 2.5rem 1.5rem 3rem;
+    min-height: auto;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-icon {
+    display: none;
+  }
+
+  section {
+    padding: 3rem 1.5rem;
+  }
+
+  .consulting-services-grid,
+  .training-list,
+  .categories-list,
+  .certifications-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
